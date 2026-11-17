@@ -3,6 +3,8 @@ import cors from "cors";
 
 import "dotenv/config";
 
+import job from "./lib/cron.js";
+
 import fs from "fs";
 import path from "path";
 
