@@ -13,6 +13,7 @@ import { connectDB } from "./lib/db.js";
 import job from "./lib/cron.js";
 
 import clerkWebhook from "./webhooks/clerk.webhook.js";
+import authRoutes from "./routes/auth.route.js";
 
 const app = express();
 
@@ -31,6 +32,8 @@ app.use(
 app.use(express.json());
 app.use(cors({ origin: FRONTEND_URL, credentials: true }));
 app.use(clerkMiddleware());
+
+app.use("/api/auth", authRoutes);
 
 app.get("/health", (req, res) => {
   res.status(200).json({ ok: true });
