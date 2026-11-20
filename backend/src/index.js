@@ -14,6 +14,7 @@ import job from "./lib/cron.js";
 
 import clerkWebhook from "./webhooks/clerk.webhook.js";
 import authRoutes from "./routes/auth.route.js";
+import messageRoute from "./routes/message.route.js";
 
 const app = express();
 
@@ -34,6 +35,7 @@ app.use(cors({ origin: FRONTEND_URL, credentials: true }));
 app.use(clerkMiddleware());
 
 app.use("/api/auth", authRoutes);
+app.use("/api/messages", messageRoute);
 
 app.get("/health", (req, res) => {
   res.status(200).json({ ok: true });
