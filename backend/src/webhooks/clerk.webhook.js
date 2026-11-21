@@ -9,7 +9,9 @@ router.post("/", async (req, res) => {
   try {
     const signingSecret = process.env.CLERK_WEBHOOK_SIGNING_SECRET;
     if (!signingSecret) {
-      res.status(503).json({ message: "Webhook secret is not provided" });
+      return res
+        .status(503)
+        .json({ message: "Webhook secret is not provided" });
     }
 
     // clerk's verifier expects a Web Request with the raw body; express.raw gives a Buffer.

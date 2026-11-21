@@ -1,7 +1,7 @@
 import User from "../models/user.model.js";
 import Message from "../models/message.model.js";
-import { hasImageKitConfig } from "../lib/imagekit.js";
-import { getReceiverSocketId } from "../lib/socket.js";
+import { uploadChatMedia, hasImageKitConfig } from "../lib/imagekit.js";
+import { io, getReceiverSocketId } from "../lib/socket.js";
 
 export async function getUsersForSidebar(req, res) {
   try {
@@ -115,7 +115,7 @@ export async function sendMessage(req, res) {
       }
 
       const url = await uploadChatMedia(req.file);
-      if (req.file.mimetype.startWith("video/")) videoUrl = url;
+      if (req.file.mimetype.startsWith("video/")) videoUrl = url;
       else imageUrl = url;
     }
 
